@@ -62,6 +62,6 @@
   </div>
 </div>
 
-<script src="assets/js/main.js" defer></script>
+<script src="<?= asset('assets/js/main.js') ?>" defer></script>
 </body>
 </html>

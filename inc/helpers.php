@@ -162,6 +162,17 @@ function fact_bar(): string
  * a photo running the full width of the screen, a scrim darkening the
  * side the card sits on, and a cream card floating over it.
  */
+/**
+ * Asset URL with the file's own timestamp attached, so a browser never serves
+ * a stale stylesheet or script after a rebuild. Only worth it for the two
+ * files that actually change; photos keep their plain paths.
+ */
+function asset(string $path): string
+{
+    $stamp = @filemtime(__DIR__ . '/../' . $path);
+    return $stamp ? $path . '?v=' . $stamp : $path;
+}
+
 function offer_block(string $img = 'dumbbells.jpg'): string
 {
     $inc = '';
