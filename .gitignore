@@ -14,3 +14,6 @@ desktop.ini
 .DS_Store
 *.swp
 *~
+
+# static demo build output — rebuilt with: php build-static.php
+_site/
