@@ -150,14 +150,20 @@ php build-static.php
 ```
 
 That writes `_site/`. It is already live at
-<https://gothxam.github.io/thequadgym/>, served from the `gh-pages` branch.
-To update the demo after a change:
+<https://gothxam.github.io/thequadgym/>, served from the `gh-pages` branch of
+this repo. To update the demo after changing the site:
 
 ```bash
-php build-static.php && git push origin main
+php build-static.php
+git worktree add ../_ghpages gh-pages
+rm -rf ../_ghpages/* && cp -r _site/. ../_ghpages/
+git -C ../_ghpages add -A && git -C ../_ghpages commit -m "Rebuild demo"
+git -C ../_ghpages push
+git worktree remove ../_ghpages
 ```
 
-then push the rebuilt `_site/` to `gh-pages`.
+`gh-pages` holds only built HTML, so never edit it by hand — rebuild instead.
+GitHub takes about half a minute to publish.
 
 What the static build changes, and nothing else:
 
