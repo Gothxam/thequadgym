@@ -149,21 +149,21 @@ is sorted.
 php build-static.php
 ```
 
-That writes `_site/`. It is already live at
-<https://gothxam.github.io/thequadgym/>, served from the `gh-pages` branch of
-this repo. To update the demo after changing the site:
+That writes `_site/`, which is only for checking the build locally — it is
+gitignored.
+
+**The demo rebuilds itself.** It is live at
+<https://gothxam.github.io/thequadgym/>, and `.github/workflows/demo.yml`
+rebuilds and republishes it on every push to `main`:
 
 ```bash
-php build-static.php
-git worktree add ../_ghpages gh-pages
-rm -rf ../_ghpages/* && cp -r _site/. ../_ghpages/
-git -C ../_ghpages add -A && git -C ../_ghpages commit -m "Rebuild demo"
-git -C ../_ghpages push
-git worktree remove ../_ghpages
+git push
 ```
 
-`gh-pages` holds only built HTML, so never edit it by hand — rebuild instead.
-GitHub takes about half a minute to publish.
+That is the whole process. The workflow runs the same `build-static.php`, checks
+all six pages came out non-empty with no `.php` links left behind, then
+publishes. It takes about a minute, and you can watch it under the repo's
+**Actions** tab or trigger it by hand there with **Run workflow**.
 
 What the static build changes, and nothing else:
 

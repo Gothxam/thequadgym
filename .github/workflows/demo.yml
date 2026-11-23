@@ -1,0 +1,59 @@
+# Rebuilds the static demo and publishes it to GitHub Pages on every push to
+# main. The real site is still PHP — this only keeps the demo in step.
+name: Publish demo
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Pages needs these; nothing here writes to the repo.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let a running deploy finish rather than cancelling it half way.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show PHP version
+        run: php -v
+
+      - name: Configure Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Build the static site
+        run: php build-static.php "${{ steps.pages.outputs.base_url }}" _site
+
+      - name: Check the build actually produced the pages
+        run: |
+          set -e
+          for f in index about programs fitness gallery contact; do
+            test -s "_site/$f.html" || { echo "missing or empty: $f.html"; exit 1; }
+          done
+          grep -q 'noindex' _site/index.html || { echo "noindex missing"; exit 1; }
+          ! grep -rqE '(href|action)="[^"]*\.php"' _site/*.html || { echo ".php link left in output"; exit 1; }
+          echo "pages: $(ls _site/*.html | wc -l), assets: $(find _site/assets -type f | wc -l)"
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
