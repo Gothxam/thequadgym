@@ -34,7 +34,10 @@ $ld = [
 <main>
 
 <!-- ============ HERO ============ -->
-<section class="relative isolate overflow-hidden min-h-[84svh] flex flex-col justify-center pt-24 pb-8">
+<!-- 100svh minus the offer marquee under it (3.25rem), so the hero fills the
+     first screen and the red bar sits flush along the bottom of it. -->
+<section class="relative isolate overflow-hidden min-h-[calc(100svh-3.25rem)]
+                flex flex-col justify-center pt-24 pb-8">
 
   <div class="hero-media">
     <div class="slides" data-slides="6000">
