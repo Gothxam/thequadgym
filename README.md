@@ -139,6 +139,39 @@ npx tailwindcss -i src/input.css -o assets/css/tailwind.css --minify
 You only need this for **style** changes. Editing text or content in `inc/config.php`
 needs no build at all — just save and reload.
 
+## Free demo build
+
+`build-static.php` renders the six pages to plain HTML so the site can sit on
+hosting that does not run PHP — handy for showing a client before the real host
+is sorted.
+
+```bash
+php build-static.php
+```
+
+That writes `_site/`. It is already live at
+<https://gothxam.github.io/thequadgym/>, served from the `gh-pages` branch.
+To update the demo after a change:
+
+```bash
+php build-static.php && git push origin main
+```
+
+then push the rebuilt `_site/` to `gh-pages`.
+
+What the static build changes, and nothing else:
+
+- internal links become `.html`
+- every page is marked `noindex` and `robots.txt` disallows everything, so the
+  demo cannot compete with the real site in Google
+- the enquiry form hands off to WhatsApp **from the browser** rather than
+  through `inc/enquiry.php`, which is the same thing the PHP site does while
+  `'email'` is blank
+
+> The demo is a convenience, not the plan. Host the real site as PHP so
+> `inc/config.php` stays the one place you edit content, and so the form can be
+> switched to email later by filling in `'email'`.
+
 ## Local preview
 
 ```bash
