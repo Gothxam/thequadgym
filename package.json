@@ -1,0 +1,17 @@
+{
+  "name": "the-quad-gym",
+  "version": "1.0.0",
+  "description": "Static website for The Quads Gym, Manimajra, Chandigarh. Plain HTML, CSS and vanilla JavaScript. No framework, no build step needed to host it — upload the folder to any host (Hostinger, Netlify, Vercel, cPanel, GitHub Pages) and it works.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "ffmpeg-static": "^5.2.0",
+    "tailwindcss": "^3.4.17"
+  }
+}

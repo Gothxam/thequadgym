@@ -1,0 +1,16 @@
+# npm — only needed to rebuild the stylesheet
+node_modules/
+
+# your untouched 4K originals (717 MB) — kept locally for re-cropping only
+assets/_originals/
+
+# not part of the site
+admit_card_files.zip
+
+# OS / editor cruft
+Thumbs.db
+ehthumbs.db
+desktop.ini
+.DS_Store
+*.swp
+*~
