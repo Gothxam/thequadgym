@@ -121,6 +121,10 @@ two-column row of text beneath, rather than six identical left/right splits.
 - `assets/_originals/` — your untouched 4K originals, **717 MB**
 
 > **Do not upload `assets/_originals/`.** It is kept only so you can re-crop later.
+> `.gitignore` already keeps it, `node_modules/` and the stray zip out of git.
+>
+> After cloning, run `npm install` only if you need to rebuild the stylesheet — the
+> compiled `assets/css/tailwind.css` is committed, so the site runs straight away.
 
 The home hero is five photos crossfading every 6 seconds. Inner pages use one looping clip.
 
