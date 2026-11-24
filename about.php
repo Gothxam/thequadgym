@@ -83,26 +83,12 @@ const ADDED = [
         ]) ?>
       </div>
       <div class="flex flex-wrap gap-3 mt-8" data-up data-d="3">
-        <a href="programs.php" class="btn btn-brand">See the programs <?= icon('arrow') ?></a>
-        <a href="contact.php" class="btn btn-ghost">Ask a question</a>
+        <a href="trainers.php" class="btn btn-brand">Meet the trainers <?= icon('arrow') ?></a>
+        <a href="programs.php" class="btn btn-ghost">See the programs</a>
       </div>
     </div>
     <div class="lg:col-span-6 order-1 lg:order-2" data-up>
       <figure class="media media-zoom aspect-[4/3]"><img src="assets/img/machine-floor-2.jpg" alt="Trainer on the machine floor" loading="lazy"></figure>
-    </div>
-  </div>
-</section>
-
-<!-- who they are -->
-<section class="sec">
-  <div class="wrap">
-    <?= sec_head('The team', 'Who you will be training with.',
-        'Six of the twelve. Between them they cover the weights floor, the studio, the cardio deck and the turf.',
-        ['All the profiles', 'trainers.php']) ?>
-    <?= trainers_block() ?>
-    <div class="flex flex-wrap gap-3 mt-12" data-up>
-      <a href="trainers.php" class="btn btn-brand">Read the full profiles <?= icon('arrow') ?></a>
-      <a href="contact.php" class="btn btn-ghost">Come in and meet them</a>
     </div>
   </div>
 </section>
