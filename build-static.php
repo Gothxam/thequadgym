@@ -17,7 +17,8 @@ $out  = $argv[2] ?? __DIR__ . '/_site';
 $root = __DIR__;
 $php  = PHP_BINARY;
 
-const PAGES  = ['index.php', 'about.php', 'programs.php', 'fitness.php', 'gallery.php', 'contact.php'];
+const PAGES  = ['index.php', 'about.php', 'programs.php', 'trainers.php',
+                'fitness.php', 'gallery.php', 'contact.php'];
 const ASSETS = ['assets/css', 'assets/img', 'assets/js', 'assets/video'];
 
 /* ---------- helpers ---------- */

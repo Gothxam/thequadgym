@@ -576,6 +576,44 @@ summary { list-style: none }
 .person__line{ font-size:.86rem; line-height:1.55; color:rgba(255,255,255,.55); margin-top:.6rem }
 .person__tags{ display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.9rem }
 
+/* --- full trainer profile: portrait card with a facts list under it --- */
+.profile__card{
+  overflow:hidden; border:1px solid rgba(255,255,255,.1);
+  border-radius:.9rem; background:#141418;
+}
+/* with no photograph the band is shorter, but taller than in the grid,
+   because a facts list sits under it rather than a second row of cards */
+.profile__card .person__shot--mono{ aspect-ratio:4/3 }
+.profile__facts{ display:grid }
+.profile__facts > div{
+  display:flex; align-items:baseline; justify-content:space-between; gap:1.2rem;
+  padding:.85rem 1.15rem; border-top:1px solid rgba(255,255,255,.08);
+}
+.profile__facts dt{
+  flex:none; font-family:"JetBrains Mono",monospace; font-size:.55rem;
+  letter-spacing:.15em; text-transform:uppercase; color:rgba(255,255,255,.42);
+}
+.profile__facts dd{ font-size:.84rem; line-height:1.5; color:rgba(255,255,255,.72); text-align:right }
+.profile__sub{
+  font-family:"JetBrains Mono",monospace; font-size:.58rem;
+  letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.45);
+}
+
+/* the row of names across the top of the trainers page */
+.roster{ display:flex; flex-wrap:wrap; gap:.5rem }
+.roster a{
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.5rem .85rem; border-radius:.5rem;
+  border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.02);
+  font-size:.84rem; color:rgba(255,255,255,.72);
+  transition:border-color .25s, color .25s, background .25s;
+}
+.roster a:hover{ border-color:#E11225; color:#fff; background:rgba(225,18,37,.1) }
+.roster b{
+  font-family:"Archivo",system-ui,sans-serif; font-weight:900; font-style:italic;
+  font-size:.8rem; color:#E11225; letter-spacing:-.03em;
+}
+
 /* --- "View all →" link sitting opposite a section heading --- */
 .seeall{
   display:inline-flex; align-items:center; gap:.5rem;

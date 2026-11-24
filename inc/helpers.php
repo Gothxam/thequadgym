@@ -258,10 +258,9 @@ function pt_strip(): string
 function trainers_block(): string
 {
     $o = TRAINERS_ARE_SAMPLES
-        ? sample_note('Sample people, so the section has something to show. '
-            . 'Replace the names, years and specialisms in '
-            . '<code class="font-mono text-2xs">inc/config.php</code> — add a '
-            . '<code class="font-mono text-2xs">photo</code> and the initials give way to it.')
+        ? sample_note('Sample people, so the section has something to show. Replace them in '
+            . '<code class="font-mono text-2xs">inc/config.php</code>; the full profiles are on '
+            . '<a href="trainers.php" class="tlink">the trainers page</a>.')
         : '';
 
     $o .= '<div class="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">';
@@ -279,17 +278,112 @@ function trainers_block(): string
               . e($t['name']) . '"><span class="person__mono">' . initials($t['name']) . '</span>'
               . '<span class="person__yrs">' . $t['years'] . '</span></div>';
 
-        $o .= '<article class="person" data-up data-d="' . min($i, 3) . '">'
+        $o .= '<a class="person" href="trainers.php#' . $t['slug'] . '" data-up data-d="' . min($i, 3) . '">'
             . $shot
             . '<div class="person__body">'
             . '<p class="person__role">' . $t['role'] . '</p>'
             . '<h3 class="person__name">' . $t['name'] . '</h3>'
             . '<p class="person__line">' . $t['line'] . '</p>'
             . '<div class="person__tags">' . $tags . '</div>'
-            . '</div></article>';
+            . '<p class="tlink text-xs mt-4">Read profile ' . icon('arrow') . '</p>'
+            . '</div></a>';
     }
 
     return $o . '</div>';
+}
+
+/** Jump links to each profile, across the top of the trainers page. */
+function roster(): string
+{
+    $o = '<div class="roster" data-up>';
+    foreach (TRAINERS as $t) {
+        $o .= '<a href="#' . $t['slug'] . '"><b>' . initials($t['name']) . '</b>'
+            . $t['name'] . '</a>';
+    }
+    return $o . '</div>';
+}
+
+/**
+ * One trainer's full profile. $i alternates the background so the page
+ * reads as a list of people rather than one long wall.
+ */
+function profile_block(array $t, int $i): string
+{
+    $first = explode(' ', $t['name'])[0];
+
+    $shot = $t['photo'] !== ''
+        ? '<div class="person__shot"><img src="assets/img/' . $t['photo'] . '" alt="'
+          . e($t['name']) . ', ' . e($t['role']) . ' at The Quads Gym" loading="lazy"></div>'
+        : '<div class="person__shot person__shot--mono" role="img" aria-label="' . e($t['name'])
+          . '"><span class="person__mono">' . initials($t['name']) . '</span></div>';
+
+    $facts = '';
+    foreach ([
+        'On the floor'      => $t['hours'],
+        'Speaks'            => $t['langs'],
+        'Personal training' => $t['pt'],
+        'With us since'     => $t['since'],
+    ] as $k => $v) {
+        $facts .= '<div><dt>' . $k . '</dt><dd>' . $v . '</dd></div>';
+    }
+
+    $tags = '';
+    foreach ($t['tags'] as $tag) {
+        $tags .= '<span class="chip">' . $tag . '</span>';
+    }
+
+    $cert = '';
+    foreach ($t['cert'] as $c) {
+        $cert .= '<li>' . $c . '</li>';
+    }
+
+    $bio = '';
+    foreach ($t['bio'] as $n => $para) {
+        $bio .= '<p class="body text-[1.01rem] max-w-[62ch]' . ($n ? ' mt-4' : ' mt-6') . '">' . $para . '</p>';
+    }
+
+    $wa = SITE['wa'] . '?text=' . rawurlencode(
+        'Hi, I would like to train with ' . $t['name'] . ' at The Quads Gym.'
+    );
+
+    return '
+<section id="' . $t['slug'] . '" class="sec scroll-mt-16' . ($i % 2 ? ' bg-ink-2' : '') . '">
+  <div class="wrap">
+    <div class="grid lg:grid-cols-12 gap-9 lg:gap-14">
+
+      <aside class="lg:col-span-4" data-up>
+        <div class="profile__card">' . $shot . '
+          <dl class="profile__facts">' . $facts . '</dl>
+        </div>
+      </aside>
+
+      <div class="lg:col-span-7 lg:col-start-6">
+        <p class="person__role" data-up>' . $t['role'] . ' &middot; ' . $t['years'] . '</p>
+        <h2 class="h-lg mt-3 text-balance" data-up data-d="1">' . $t['name'] . '</h2>
+        <div class="flex flex-wrap gap-2 mt-5" data-up data-d="1">' . $tags . '</div>
+
+        <div data-up data-d="2">' . $bio . '</div>
+
+        <div class="grid sm:grid-cols-2 gap-8 mt-9 pt-9 border-t hair" data-up data-d="3">
+          <div>
+            <p class="profile__sub">What ' . $first . ' helps with</p>
+            <div class="mt-4">' . tick_list($t['helps']) . '</div>
+          </div>
+          <div>
+            <p class="profile__sub">Certifications</p>
+            <ul class="dash text-white/65 mt-4">' . $cert . '</ul>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-3 mt-9" data-up data-d="3">
+          <a href="' . $wa . '" target="_blank" rel="noopener" class="btn btn-brand">
+            Train with ' . $first . ' ' . icon('arrow') . '</a>
+          <a href="tel:' . e(SITE['tel']) . '" class="btn btn-ghost">' . icon('phone') . ' Call the gym</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>';
 }
 
 function offer_block(string $img = 'dumbbells.jpg'): string

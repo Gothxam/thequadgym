@@ -97,10 +97,12 @@ const ADDED = [
 <section class="sec">
   <div class="wrap">
     <?= sec_head('The team', 'Who you will be training with.',
-        'Six of the twelve. Between them they cover the weights floor, the studio, the cardio deck and the turf.') ?>
+        'Six of the twelve. Between them they cover the weights floor, the studio, the cardio deck and the turf.',
+        ['All the profiles', 'trainers.php']) ?>
     <?= trainers_block() ?>
-    <div class="mt-12" data-up>
-      <a href="contact.php" class="btn btn-ghost">Come in and meet them <?= icon('arrow') ?></a>
+    <div class="flex flex-wrap gap-3 mt-12" data-up>
+      <a href="trainers.php" class="btn btn-brand">Read the full profiles <?= icon('arrow') ?></a>
+      <a href="contact.php" class="btn btn-ghost">Come in and meet them</a>
     </div>
   </div>
 </section>

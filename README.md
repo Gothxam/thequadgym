@@ -9,8 +9,9 @@ almost any shared host. Nothing else to install.
 | File | What it is |
 |---|---|
 | `index.php` | Home — hero slideshow, offer, **membership plans**, six training cards, about, what's inside, photos, tools, map, FAQ |
-| `about.php` | The story, six rules, the trainers, **who they are**, what the rebuild added |
+| `about.php` | The story, six rules, the trainers, a card per person linking to their profile, what the rebuild added |
 | `programs.php` | Six programs, each anchored, with a quick-jump bar |
+| `trainers.php` | A full profile per trainer, each anchored, with a quick-jump row |
 | `fitness.php` | Free tools: BMI, calories & protein, one-rep max, plus workout plans and guides |
 | `gallery.php` | 32 photos with a lightbox |
 | `contact.php` | Address, hours, **working enquiry form**, map, quick FAQ |
@@ -192,10 +193,12 @@ Then open <http://localhost:5599>. XAMPP's PHP is at `C:/xampp/php/php.exe`.
   figure is real. The other three, and the personal-training prices, are samples. Set them
   in `PLANS` and `PT_PLANS` in `inc/config.php`, then flip `PLANS_ARE_SAMPLES` to `false`
   and the amber warning on the section disappears.
-- **Real trainers** — six sample people are in `TRAINERS` in `inc/config.php`. Replace the
-  names, years and specialisms, then flip `TRAINERS_ARE_SAMPLES` to `false`. Each one shows
-  its initials until you give it a `'photo'`; drop a file in `assets/img/`, name it there,
-  and the card switches to the photograph on its own.
+- **Real trainers** — six sample people are in `TRAINERS` in `inc/config.php`, each with a
+  full profile on `trainers.php`: bio, what they help with, certifications, hours, languages.
+  Replace them and flip `TRAINERS_ARE_SAMPLES` to `false`. Each one shows its initials until
+  you give it a `'photo'`; drop a file in `assets/img/`, name it there, and both the card and
+  the profile switch to the photograph on their own. `'slug'` is the anchor in the page URL,
+  so keep it lowercase with hyphens.
 - **Real reviews** — nothing is shown, because inventing them would be dishonest. Once you
   have Google reviews they can be quoted with names.
 - **Social links** — Instagram and Facebook point at the generic homepages. Set them in

@@ -37,7 +37,7 @@ jobs:
       - name: Check the build actually produced the pages
         run: |
           set -e
-          for f in index about programs fitness gallery contact; do
+          for f in index about programs trainers fitness gallery contact; do
             test -s "_site/$f.html" || { echo "missing or empty: $f.html"; exit 1; }
           done
           grep -q 'noindex' _site/index.html || { echo "noindex missing"; exit 1; }
