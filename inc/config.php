@@ -42,6 +42,148 @@ const OFFER = [
     'fine'     => 'Walk in any day, 5 AM to 10 PM. Limited period.',
 ];
 
+/* ------------------------------------------------------------------
+   MEMBERSHIP PLANS  —  PLACEHOLDER PRICES
+
+   Only the 6-month figure is real: 4,999, the offer already running on
+   the site. The other three prices, and every personal-training price
+   below, are made up so the section has something to show.
+
+   >>> Replace them with your real prices before the site goes live. <<<
+   Nothing else needs touching — the section reads straight from here.
+   ------------------------------------------------------------------ */
+
+/* Shows the amber "sample prices" note on the plans section.
+   Set to false once the real prices are in and the note disappears. */
+const PLANS_ARE_SAMPLES = true;
+
+const PLANS = [
+    [
+        'name'  => 'Monthly',
+        'price' => '1,499',
+        'per'   => 'per month',
+        'rate'  => '',
+        'note'  => 'Pay month to month. Stop whenever you like.',
+        'badge' => '',
+        'perks' => [
+            'Gym, free weights and cardio',
+            'Zumba and aerobics classes',
+            'Turf and functional area',
+            'A starting plan from a trainer',
+        ],
+    ],
+    [
+        'name'  => '3 months',
+        'price' => '3,499',
+        'per'   => 'for 3 months',
+        'rate'  => '&#8377;1,166 a month',
+        'note'  => 'The short commitment, for a season.',
+        'badge' => '',
+        'perks' => [
+            'Everything in Monthly',
+            'One body composition check',
+            '15 days on hold if you travel',
+        ],
+    ],
+    [
+        'name'  => '6 months',
+        'price' => '4,999',
+        'per'   => 'for 6 months',
+        'rate'  => '&#8377;833 a month',
+        'note'  => 'The offer running now. No joining fee.',
+        'badge' => 'Most popular',
+        'perks' => [
+            'Everything in 3 months',
+            '1 free month on hold',
+            'Diet guidance around home food',
+            'Progress check every few weeks',
+        ],
+    ],
+    [
+        'name'  => '12 months',
+        'price' => '8,999',
+        'per'   => 'for 12 months',
+        'rate'  => '&#8377;750 a month',
+        'note'  => 'The cheapest way in, per month.',
+        'badge' => 'Best rate',
+        'perks' => [
+            'Everything in 6 months',
+            '2 free months on hold',
+            'Two personal training sessions',
+        ],
+    ],
+];
+
+/* Personal training, charged on top of a membership. Sample prices. */
+const PT_PLANS = [
+    ['One session',        '600',    'to try it out'],
+    ['12 sessions',        '6,000',  'about a month, 3 a week'],
+    ['36 sessions',        '15,000', 'about three months'],
+];
+
+/* ------------------------------------------------------------------
+   TRAINERS  —  PLACEHOLDER PEOPLE
+
+   The gym has twelve trainers; these six are invented so the section
+   has something to show. Swap in your real names, years and specialisms.
+
+   'photo' is optional. Leave it '' and the card shows the initials in
+   brand red; drop a file in assets/img/ and name it here to use a real
+   photograph instead. Nothing else changes.
+   ------------------------------------------------------------------ */
+const TRAINERS_ARE_SAMPLES = true;
+
+const TRAINERS = [
+    [
+        'name'  => 'Harman Singh',
+        'role'  => 'Head coach',
+        'years' => '11 years',
+        'photo' => '',
+        'tags'  => ['Strength', 'Powerlifting'],
+        'line'  => 'Runs the weights floor. Good with beginners who are nervous about the squat rack.',
+    ],
+    [
+        'name'  => 'Simran Kaur',
+        'role'  => 'Studio lead',
+        'years' => '7 years',
+        'photo' => '',
+        'tags'  => ['Zumba', 'Aerobics'],
+        'line'  => 'Takes most of the evening classes. Keeps the room loud and the steps simple.',
+    ],
+    [
+        'name'  => 'Vikas Rana',
+        'role'  => 'Trainer',
+        'years' => '9 years',
+        'photo' => '',
+        'tags'  => ['Fat loss', 'Cardio'],
+        'line'  => 'Builds the circuits on the cardio deck and keeps an eye on the numbers.',
+    ],
+    [
+        'name'  => 'Neha Bansal',
+        'role'  => 'Trainer',
+        'years' => '6 years',
+        'photo' => '',
+        'tags'  => ['Weight loss', 'Diet guidance'],
+        'line'  => 'Plans around normal home food, not supplements and boiled chicken.',
+    ],
+    [
+        'name'  => 'Amandeep Gill',
+        'role'  => 'Trainer',
+        'years' => '8 years',
+        'photo' => '',
+        'tags'  => ['Functional', 'Sport'],
+        'line'  => 'Takes the turf lane. Works with players in for the off season.',
+    ],
+    [
+        'name'  => 'Pooja Mehra',
+        'role'  => 'Personal trainer',
+        'years' => '10 years',
+        'photo' => '',
+        'tags'  => ['Personal training', 'Back from injury'],
+        'line'  => 'Eases people back in after a knee or shoulder problem, at their pace.',
+    ],
+];
+
 /* Navigation. Key = file, value = label. */
 const NAV = [
     'index.php'    => 'Home',

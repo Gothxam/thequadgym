@@ -95,6 +95,36 @@ $ld = [
 <?= fact_bar() ?>
 <?= offer_block() ?>
 
+<!-- ============ PLANS ============ -->
+<section id="plans" class="sec bg-ink-2 scroll-mt-16">
+  <div class="wrap">
+    <?= sec_head('Memberships', 'Pick how long you want to train.',
+        'One membership covers the whole gym — weights, cardio, turf and the studio classes. Only personal training is charged on top.') ?>
+
+    <?= plans_block() ?>
+
+    <div class="mt-14 md:mt-20 pt-12 md:pt-16 border-t hair">
+      <div class="flex flex-wrap items-end justify-between gap-6 mb-8" data-up>
+        <div>
+          <p class="flex items-center gap-3 font-mono text-2xs uppercase tracking-label text-brand">
+            <span class="text-brand"><?= icon('user') ?></span>Personal training
+          </p>
+          <h3 class="h-lg mt-3 text-balance">One trainer, your own plan.</h3>
+        </div>
+        <p class="body max-w-[38ch]">Charged on top of any membership. Book a block and
+          come in at a time that suits you both.</p>
+      </div>
+      <?= pt_strip() ?>
+    </div>
+
+    <p class="text-sm text-white/40 mt-10" data-up>
+      Not sure which one? <a href="tel:<?= SITE['tel'] ?>" class="tlink">Call us</a> or
+      <a href="contact.php" class="tlink">send a message</a> and we will tell you what
+      most people your age and schedule pick.
+    </p>
+  </div>
+</section>
+
 <!-- ============ PROGRAMS ============ -->
 <section class="sec overflow-hidden">
   <div class="wrap">

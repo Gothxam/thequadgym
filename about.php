@@ -67,7 +67,7 @@ const ADDED = [
 </section>
 
 <!-- trainers -->
-<section class="sec bg-ink-2">
+<section id="trainers" class="sec bg-ink-2 scroll-mt-16">
   <div class="wrap grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
     <div class="lg:col-span-6 order-2 lg:order-1">
       <?= kicker('Trainers') ?>
@@ -89,6 +89,18 @@ const ADDED = [
     </div>
     <div class="lg:col-span-6 order-1 lg:order-2" data-up>
       <figure class="media media-zoom aspect-[4/3]"><img src="assets/img/machine-floor-2.jpg" alt="Trainer on the machine floor" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- who they are -->
+<section class="sec">
+  <div class="wrap">
+    <?= sec_head('The team', 'Who you will be training with.',
+        'Six of the twelve. Between them they cover the weights floor, the studio, the cardio deck and the turf.') ?>
+    <?= trainers_block() ?>
+    <div class="mt-12" data-up>
+      <a href="contact.php" class="btn btn-ghost">Come in and meet them <?= icon('arrow') ?></a>
     </div>
   </div>
 </section>

@@ -173,6 +173,125 @@ function asset(string $path): string
     return $stamp ? $path . '?v=' . $stamp : $path;
 }
 
+/** Amber note marking a section that is still showing sample content. */
+function sample_note(string $what): string
+{
+    return '<div class="sample" data-up>'
+         . '<svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">'
+         . '<circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.4"/>'
+         . '<path d="M8 4.8v4M8 11.1v.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>'
+         . '</svg><span>' . $what . '</span></div>';
+}
+
+/** Up to two initials, for a trainer card with no photograph yet. */
+function initials(string $name): string
+{
+    $parts = array_slice(array_values(array_filter(preg_split('/\s+/u', trim($name)) ?: [])), 0, 2);
+    $out   = '';
+    foreach ($parts as $part) {
+        $out .= function_exists('mb_substr')
+            ? mb_strtoupper(mb_substr($part, 0, 1, 'UTF-8'), 'UTF-8')
+            : strtoupper(substr($part, 0, 1));
+    }
+    return $out;
+}
+
+/** The four membership cards, read straight from PLANS in config.php. */
+function plans_block(): string
+{
+    $o = PLANS_ARE_SAMPLES
+        ? sample_note('Sample prices, except the &#8377;' . OFFER['price']
+            . ' six-month offer, which is the real one. Set your own in '
+            . '<code class="font-mono text-2xs">inc/config.php</code>.')
+        : '';
+
+    $o .= '<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 items-stretch">';
+
+    foreach (PLANS as $i => $p) {
+        $pick = $p['badge'] === 'Most popular';
+        $wa   = SITE['wa'] . '?text=' . rawurlencode(
+            'Hi, I would like to join The Quads Gym on the ' . $p['name'] . ' plan.'
+        );
+
+        $perks = '';
+        foreach ($p['perks'] as $t) {
+            $perks .= '<li>' . $t . '</li>';
+        }
+
+        $o .= '<div class="plan' . ($pick ? ' plan--pick' : '') . '" data-up data-d="' . min($i, 3) . '">';
+        if ($p['badge'] !== '') {
+            $o .= '<span class="plan__badge">' . $p['badge'] . '</span>';
+        }
+        $o .= '<p class="plan__name">' . $p['name'] . '</p>'
+            . '<p class="plan__price"><span class="plan__cur">&#8377;</span>'
+            . '<span class="plan__amt">' . $p['price'] . '</span></p>'
+            . '<p class="plan__per">' . $p['per'] . '</p>';
+        if ($p['rate'] !== '') {
+            $o .= '<p class="plan__rate">' . $p['rate'] . '</p>';
+        }
+        $o .= '<p class="plan__note">' . $p['note'] . '</p>'
+            . '<ul class="plan__perks">' . $perks . '</ul>'
+            . '<div class="plan__cta">'
+            . '<a href="' . $wa . '" target="_blank" rel="noopener" class="btn '
+            . ($pick ? 'btn-brand' : 'btn-ghost') . ' w-full">Join on this plan</a>'
+            . '</div></div>';
+    }
+
+    return $o . '</div>';
+}
+
+/** Personal training prices, charged on top of a membership. */
+function pt_strip(): string
+{
+    $o = '<div class="grid sm:grid-cols-3 gap-4 md:gap-5">';
+    foreach (PT_PLANS as $i => [$name, $price, $note]) {
+        $o .= '<div class="rounded-xl border hair p-6 bg-ink-2" data-up data-d="' . $i . '">'
+            . '<p class="plan__name">' . $name . '</p>'
+            . '<p class="plan__price"><span class="plan__cur">&#8377;</span>'
+            . '<span class="plan__amt text-[1.6rem]">' . $price . '</span></p>'
+            . '<p class="plan__per">' . $note . '</p></div>';
+    }
+    return $o . '</div>';
+}
+
+/** The trainer grid. Uses a photo where TRAINERS gives one, initials otherwise. */
+function trainers_block(): string
+{
+    $o = TRAINERS_ARE_SAMPLES
+        ? sample_note('Sample people, so the section has something to show. '
+            . 'Replace the names, years and specialisms in '
+            . '<code class="font-mono text-2xs">inc/config.php</code> — add a '
+            . '<code class="font-mono text-2xs">photo</code> and the initials give way to it.')
+        : '';
+
+    $o .= '<div class="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">';
+
+    foreach (TRAINERS as $i => $t) {
+        $tags = '';
+        foreach ($t['tags'] as $tag) {
+            $tags .= '<span class="chip">' . $tag . '</span>';
+        }
+
+        $shot = $t['photo'] !== ''
+            ? '<div class="person__shot"><img src="assets/img/' . $t['photo'] . '" alt="'
+              . e($t['name']) . ', ' . e($t['role']) . ' at The Quads Gym" loading="lazy"></div>'
+            : '<div class="person__shot person__shot--mono" role="img" aria-label="'
+              . e($t['name']) . '"><span class="person__mono">' . initials($t['name']) . '</span>'
+              . '<span class="person__yrs">' . $t['years'] . '</span></div>';
+
+        $o .= '<article class="person" data-up data-d="' . min($i, 3) . '">'
+            . $shot
+            . '<div class="person__body">'
+            . '<p class="person__role">' . $t['role'] . '</p>'
+            . '<h3 class="person__name">' . $t['name'] . '</h3>'
+            . '<p class="person__line">' . $t['line'] . '</p>'
+            . '<div class="person__tags">' . $tags . '</div>'
+            . '</div></article>';
+    }
+
+    return $o . '</div>';
+}
+
 function offer_block(string $img = 'dumbbells.jpg'): string
 {
     $inc = '';

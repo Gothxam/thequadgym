@@ -8,8 +8,8 @@ almost any shared host. Nothing else to install.
 
 | File | What it is |
 |---|---|
-| `index.php` | Home — hero slideshow, offer, six training cards, about, what's inside, photos, tools, map, FAQ |
-| `about.php` | The story, six rules, the trainers, what the rebuild added |
+| `index.php` | Home — hero slideshow, offer, **membership plans**, six training cards, about, what's inside, photos, tools, map, FAQ |
+| `about.php` | The story, six rules, the trainers, **who they are**, what the rebuild added |
 | `programs.php` | Six programs, each anchored, with a quick-jump bar |
 | `fitness.php` | Free tools: BMI, calories & protein, one-rep max, plus workout plans and guides |
 | `gallery.php` | 32 photos with a lightbox |
@@ -188,8 +188,14 @@ Then open <http://localhost:5599>. XAMPP's PHP is at `C:/xampp/php/php.exe`.
 
 ## Still to add
 
-- **Membership plans** — no pricing table yet, by design. Send the plans and they get their
-  own section.
+- **Real membership prices** — the plans section is live, but only the ₹4,999 six-month
+  figure is real. The other three, and the personal-training prices, are samples. Set them
+  in `PLANS` and `PT_PLANS` in `inc/config.php`, then flip `PLANS_ARE_SAMPLES` to `false`
+  and the amber warning on the section disappears.
+- **Real trainers** — six sample people are in `TRAINERS` in `inc/config.php`. Replace the
+  names, years and specialisms, then flip `TRAINERS_ARE_SAMPLES` to `false`. Each one shows
+  its initials until you give it a `'photo'`; drop a file in `assets/img/`, name it there,
+  and the card switches to the photograph on its own.
 - **Real reviews** — nothing is shown, because inventing them would be dishonest. Once you
   have Google reviews they can be quoted with names.
 - **Social links** — Instagram and Facebook point at the generic homepages. Set them in

@@ -470,6 +470,112 @@ summary { list-style: none }
    LAYOUT PATTERNS taken from ambiorahotels.cc
    ============================================================ */
 
+/* --- membership price card --- */
+.plan{
+  position:relative; display:flex; flex-direction:column;
+  padding:1.9rem 1.6rem;
+  border:1px solid rgba(255,255,255,.1); border-radius:.9rem;
+  background:#141418;
+  transition:border-color .3s, transform .3s;
+}
+.plan:hover{ border-color:rgba(255,255,255,.22); transform:translateY(-3px) }
+.plan--pick{
+  border-color:#E11225;
+  background:linear-gradient(168deg, rgba(225,18,37,.15) 0%, #141418 48%);
+}
+.plan__badge{
+  position:absolute; top:-.6rem; left:1.6rem;
+  padding:.3rem .6rem; border-radius:.35rem;
+  background:#E11225; color:#fff;
+  font-family:"JetBrains Mono",monospace; font-size:.55rem;
+  letter-spacing:.16em; text-transform:uppercase; white-space:nowrap;
+}
+.plan__name{
+  font-family:"JetBrains Mono",monospace; font-size:.6rem;
+  letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.5);
+}
+.plan__price{
+  display:flex; align-items:baseline; gap:.25rem; margin-top:.85rem;
+  font-family:"Archivo",system-ui,sans-serif; font-weight:800; letter-spacing:-.035em;
+}
+.plan__cur{ font-size:1.3rem; color:rgba(255,255,255,.55) }
+.plan__amt{ font-size:clamp(1.9rem,3.2vw,2.5rem); line-height:1 }
+.plan__per{ font-size:.82rem; color:rgba(255,255,255,.45); margin-top:.4rem }
+.plan__rate{ display:inline-block; margin-top:.7rem; font-size:.79rem; color:#FF3B4D }
+.plan__note{ font-size:.88rem; line-height:1.55; color:rgba(255,255,255,.55); margin-top:.85rem }
+.plan__perks{
+  display:grid; gap:.55rem; margin-top:1.3rem; padding-top:1.3rem;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+.plan__perks li{
+  position:relative; padding-left:1.35rem;
+  font-size:.87rem; line-height:1.5; color:rgba(255,255,255,.62);
+}
+.plan__perks li::before{
+  content:''; position:absolute; left:0; top:.55rem;
+  width:8px; height:2px; background:#E11225;
+}
+.plan__cta{ margin-top:auto; padding-top:1.5rem }
+
+/* a sample-data warning the owner removes by flipping one flag in config */
+.sample{
+  display:flex; align-items:flex-start; gap:.7rem;
+  padding:.85rem 1.1rem; margin-bottom:2rem;
+  border:1px dashed rgba(245,185,60,.45); border-radius:.6rem;
+  background:rgba(245,185,60,.07);
+  font-size:.85rem; line-height:1.55; color:rgba(245,205,130,.92);
+}
+.sample svg{ flex:none; margin-top:.15rem; color:#F5B93C }
+
+/* --- trainer card: photo when there is one, initials when there is not --- */
+.person{
+  display:flex; flex-direction:column; overflow:hidden;
+  border:1px solid rgba(255,255,255,.1); border-radius:.9rem;
+  background:#141418; transition:border-color .3s, transform .3s;
+}
+.person:hover{ border-color:rgba(255,255,255,.22); transform:translateY(-3px) }
+.person__shot{
+  position:relative; aspect-ratio:4/5; overflow:hidden;
+  display:grid; place-items:center; background:#17171D;
+}
+.person__shot img{
+  width:100%; height:100%; object-fit:cover;
+  transition:transform 1.1s cubic-bezier(.16,1,.3,1);
+}
+.person:hover .person__shot img{ transform:scale(1.05) }
+/* No photograph yet: a short band, not a portrait-shaped hole. Adding a
+   'photo' in config.php restores the 4/5 crop above. */
+.person__shot--mono{
+  aspect-ratio:16/9;
+  background:
+    repeating-linear-gradient(135deg,
+      rgba(255,255,255,.035) 0 1px, transparent 1px 9px),
+    #17171D;
+}
+.person__mono{
+  font-family:"Archivo",system-ui,sans-serif;
+  font-weight:900; font-style:italic; letter-spacing:-.045em;
+  font-size:clamp(2.4rem,4.6vw,3.4rem); line-height:1; color:#E11225;
+}
+.person__yrs{
+  position:absolute; left:.85rem; bottom:.85rem;
+  padding:.25rem .5rem; border-radius:.3rem;
+  background:rgba(8,8,10,.72); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+  font-family:"JetBrains Mono",monospace; font-size:.55rem;
+  letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.75);
+}
+.person__body{ padding:1.1rem 1.15rem 1.35rem }
+.person__role{
+  font-family:"JetBrains Mono",monospace; font-size:.55rem;
+  letter-spacing:.17em; text-transform:uppercase; color:#FF3B4D;
+}
+.person__name{
+  font-family:"Archivo",system-ui,sans-serif; font-weight:700;
+  font-size:1.05rem; letter-spacing:-.02em; margin-top:.45rem;
+}
+.person__line{ font-size:.86rem; line-height:1.55; color:rgba(255,255,255,.55); margin-top:.6rem }
+.person__tags{ display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.9rem }
+
 /* --- "View all →" link sitting opposite a section heading --- */
 .seeall{
   display:inline-flex; align-items:center; gap:.5rem;
